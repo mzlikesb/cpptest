@@ -1,0 +1,3 @@
+﻿  main.cpp
+c:\users\stl\source\repos\cppstudy\0822\main.cpp(38): error C2664: 'void adder2(int *)': cannot convert argument 1 from 'int' to 'int *'
+  c:\users\stl\source\repos\cppstudy\0822\main.cpp(38): note: Conversion from integral type to pointer type requires reinterpret_cast, C-style cast or function-style cast

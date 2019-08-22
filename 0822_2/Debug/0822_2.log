@@ -1,0 +1,5 @@
+﻿C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.CppBuild.targets(391,5): warning MSB8028: The intermediate directory (Debug\) contains files shared from another project (0822_2.vcxproj).  This can lead to incorrect clean and rebuild behavior.
+  main.cpp
+c:\users\stl\source\repos\cppstudy\0822_2\main.cpp(35): warning C4996: 'getch': The POSIX name for this item is deprecated. Instead, use the ISO C and C++ conformant name: _getch. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17763.0\ucrt\conio.h(453): note: see declaration of 'getch'
+  0822_2.vcxproj -> C:\Users\stl\source\repos\CppStudy\Debug\0822_2_makeGameByProcedural.exe
