@@ -12,7 +12,7 @@ public:
 	~GameMode();
 
 	EGameOverType CheckRule(class Player* player,
-		class Monster* monster[],
+		class Monster* monster[], int monsterNumber,
 		class Goal* goal);
 };
 

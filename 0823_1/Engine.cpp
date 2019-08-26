@@ -15,6 +15,7 @@ Engine::Engine()
 	bIsRunning = true;
 
 	player = new Player();
+	MonsterNumber = 1;
 	monster[0] = new Monster(8, 1);
 	monster[1] = new Monster(1, 8);
 	map = new Map();
@@ -30,7 +31,10 @@ Engine::~Engine()
 	player = nullptr;
 
 	delete[] monster;
-	//monster = nullptr;
+	for (size_t i = 0; i < MonsterNumber; i++)
+	{
+		monster[i] = nullptr;
+	}	
 
 	delete map;
 	map = nullptr;
@@ -53,11 +57,11 @@ void Engine::Tick()
 	else if (KeyCode == 224) return;
 
 	player->Move(KeyCode, map);
-	for (int i = 0; i < 2; i++)
+	for (int i = 0; i < MonsterNumber; i++)
 	{
 		monster[i]->Move(map);
 	}	
-	EGameOverType result = gameMode->CheckRule(player, monster, goal);
+	EGameOverType result = gameMode->CheckRule(player, monster, MonsterNumber, goal);
 
 	switch (result)
 	{
@@ -67,8 +71,19 @@ void Engine::Tick()
 		}
 		break;
 		case EGameOverType::Escape:
-		{
-			bIsRunning = false;
+		{			
+			player->Init();
+			goal->Init();
+			MonsterNumber++;
+
+			monster[0]->Init(8, 1);
+			monster[1]->Init(1, 8);
+			/*for (int i = 0; i < MonsterNumber; i++)
+			{
+				monster[i]->Init();
+			}*/
+
+			//bIsRunning = false;
 		}
 		break;
 		default:
@@ -81,7 +96,7 @@ void Engine::Render()
 	map->Render();
 	goal->Render();
 	player->Render();
-	for (int i = 0; i < 2;i++)
+	for (int i = 0; i < MonsterNumber;i++)
 	{
 		monster[i]->Render();
 	}	

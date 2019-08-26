@@ -10,13 +10,18 @@
 
 Player::Player()
 {
-	X = 1;
-	Y = 1;
-	shape = 'P';
+	Init();
 }
 
 Player::~Player()
 {
+}
+
+void Player::Init()
+{
+	X = 1;
+	Y = 1;
+	shape = 'P';
 }
 
 void Player::Move(int KeyCode, Map* map)

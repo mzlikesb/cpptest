@@ -10,6 +10,7 @@ public:
 private:
 	bool bIsRunning;
 	int KeyCode;
+	int MonsterNumber;
 
 	void Input();
 	void Tick();
@@ -17,7 +18,7 @@ private:
 
 	// Objects
 	class Player* player;
-	class Monster* monster[2];
+	class Monster* monster[10];
 	class Map* map;	
 	class Goal* goal;
 

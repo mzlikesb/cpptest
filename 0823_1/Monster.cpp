@@ -7,6 +7,11 @@
 
 Monster::Monster(int startX, int startY)
 {
+	Init(startX, startY);
+}
+
+void Monster::Init(int startX, int startY)
+{
 	X = startX;
 	Y = startY;
 	shape = 'M';

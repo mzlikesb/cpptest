@@ -5,9 +5,7 @@
 
 Goal::Goal()
 {
-	X = 8;
-	Y = 8;
-	shape = 'G';
+	Init();
 }
 
 Goal::~Goal()
@@ -21,3 +19,11 @@ void Goal::Render()
 	printf("%c", shape);
 	printf("\033[0m");
 }
+
+void Goal::Init()
+{
+	X = 8;
+	Y = 8;
+	shape = 'G';
+}
+
