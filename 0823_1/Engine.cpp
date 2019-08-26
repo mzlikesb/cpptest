@@ -14,12 +14,12 @@ Engine::Engine()
 	std::cout << "Engine Constructor" << std::endl;
 	bIsRunning = true;
 
-	player = new Player();
-	MonsterNumber = 1;
-	monster[0] = new Monster(8, 1);
-	monster[1] = new Monster(1, 8);
+	player = new Player();	
 	map = new Map();
 	goal = new Goal();
+	MonsterNumber = 1;
+	monsters.push_back(new Monster());
+	monsters[0]->Init(map, goal, player);
 	gameMode = new GameMode();
 }
 
@@ -30,11 +30,14 @@ Engine::~Engine()
 	delete player;
 	player = nullptr;
 
-	delete[] monster;
-	for (size_t i = 0; i < MonsterNumber; i++)
+	// 메모리 release
+	for (auto monster : monsters)
 	{
-		monster[i] = nullptr;
+		delete monster;
+		monster = nullptr;
 	}	
+	// 벡터 삭제
+	monsters.erase(monsters.begin(), monsters.end());
 
 	delete map;
 	map = nullptr;
@@ -57,11 +60,11 @@ void Engine::Tick()
 	else if (KeyCode == 224) return;
 
 	player->Move(KeyCode, map);
-	for (int i = 0; i < MonsterNumber; i++)
+	for (auto monster : monsters)
 	{
-		monster[i]->Move(map);
+		monster->Move(map);
 	}	
-	EGameOverType result = gameMode->CheckRule(player, monster, MonsterNumber, goal);
+	EGameOverType result = gameMode->CheckRule(player, monsters, goal);
 
 	switch (result)
 	{
@@ -73,17 +76,14 @@ void Engine::Tick()
 		case EGameOverType::Escape:
 		{			
 			player->Init();
-			goal->Init();
-			MonsterNumber++;
-
-			monster[0]->Init(8, 1);
-			monster[1]->Init(1, 8);
-			/*for (int i = 0; i < MonsterNumber; i++)
+			goal->Init();			
+			for (auto monster : monsters)
 			{
-				monster[i]->Init();
-			}*/
-
-			//bIsRunning = false;
+				monster->Init(map, goal, player);
+			}
+			monsters.push_back(new Monster());
+			monsters[MonsterNumber]->Init(map, goal, player);
+			MonsterNumber++;
 		}
 		break;
 		default:
@@ -96,9 +96,9 @@ void Engine::Render()
 	map->Render();
 	goal->Render();
 	player->Render();
-	for (int i = 0; i < MonsterNumber;i++)
+	for (auto monster: monsters)
 	{
-		monster[i]->Render();
+		monster->Render();
 	}	
 
 	GameplayStatics::GotoXY(0, 10);

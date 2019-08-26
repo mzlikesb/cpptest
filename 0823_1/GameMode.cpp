@@ -3,7 +3,6 @@
 #include "Monster.h"
 #include "Goal.h"
 
-
 GameMode::GameMode()
 {
 }
@@ -13,11 +12,11 @@ GameMode::~GameMode()
 {
 }
 
-EGameOverType GameMode::CheckRule(Player * player, Monster* monster[], int monsterNumber, Goal * goal)
+EGameOverType GameMode::CheckRule(Player * player, vector<class Monster*> monsters, Goal * goal)
 {
-	for (int i = 0; i < monsterNumber; i++)
+	for (auto monster : monsters)
 	{
-		if (player->X == monster[i]->X && player->Y == monster[i]->Y)
+		if (player->X == monster->X && player->Y == monster->Y)
 			return EGameOverType::Dead;
 	}	
 	if (player->X == goal->X && player->Y == goal->Y) 

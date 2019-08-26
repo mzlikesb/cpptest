@@ -2,8 +2,8 @@
 class Monster
 {
 public:
-	Monster(int startX, int startY);
-	void Init(int startX, int startY);
+	Monster();
+	void Init(class Map* map, class Goal* goal, class Player* player);
 	~Monster();
 	void Move(class Map* map);
 	void Render();

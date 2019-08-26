@@ -5,15 +5,21 @@
 #include <stdlib.h>
 #include <time.h>
 
-Monster::Monster(int startX, int startY)
-{
-	Init(startX, startY);
+Monster::Monster()
+{	
 }
 
-void Monster::Init(int startX, int startY)
+void Monster::Init(Map * map, Goal * goal, Player * player)
 {
-	X = startX;
-	Y = startY;
+	// ¸Ê¿¡¼­ ºó °÷À» Ã£¾Æ¼­ ·£´ý »ý¼º
+	int initX = rand() % 10;
+	int initY = rand() % 10;	
+	while (map->data[initY][initX] != 0) {
+		initX = rand() % 10;
+		initY = rand() % 10;
+	}
+	X = initX;
+	Y = initY;
 	shape = 'M';
 	srand(time(nullptr));
 }
