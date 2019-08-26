@@ -13,11 +13,13 @@ GameMode::~GameMode()
 {
 }
 
-EGameOverType GameMode::CheckRule(Player * player, Monster * monster, Goal * goal)
+EGameOverType GameMode::CheckRule(Player * player, Monster* monster[], Goal * goal)
 {
-	if (player->X == monster->X && player->Y == monster->Y) 
-		return EGameOverType::Dead;
-
+	for (int i = 0; i < 2; i++)
+	{
+		if (player->X == monster[i]->X && player->Y == monster[i]->Y)
+			return EGameOverType::Dead;
+	}	
 	if (player->X == goal->X && player->Y == goal->Y) 
 		return EGameOverType::Escape;
 

@@ -4,9 +4,8 @@
 #include "Map.h"
 #include "Goal.h"
 #include "GameMode.h"
-#include <iostream>
-
 #include "GameplayStatics.h"
+#include <iostream>
 #include <stdio.h>
 #include <conio.h>
 
@@ -31,7 +30,7 @@ Engine::~Engine()
 	player = nullptr;
 
 	delete[] monster;
-	monster = nullptr;
+	//monster = nullptr;
 
 	delete map;
 	map = nullptr;
@@ -54,7 +53,10 @@ void Engine::Tick()
 	else if (KeyCode == 224) return;
 
 	player->Move(KeyCode, map);
-	monster->Move(map);
+	for (int i = 0; i < 2; i++)
+	{
+		monster[i]->Move(map);
+	}	
 	EGameOverType result = gameMode->CheckRule(player, monster, goal);
 
 	switch (result)
@@ -79,7 +81,11 @@ void Engine::Render()
 	map->Render();
 	goal->Render();
 	player->Render();
-	monster->Render();
+	for (int i = 0; i < 2;i++)
+	{
+		monster[i]->Render();
+	}	
+
 	GameplayStatics::GotoXY(0, 10);
 }
 
