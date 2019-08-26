@@ -1,14 +1,14 @@
 #pragma once
-class Goal
+#include "Map.h"
+#include "Character.h"
+
+class Goal : public Character
 {
 public:
 	Goal();
 	~Goal();
-	void Render();
-	void Init();
 
-	int X;
-	int Y;
-	char shape;
+	virtual void Render() override;
+	void Init();
 };
 

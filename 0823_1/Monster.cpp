@@ -1,35 +1,46 @@
 #include "Monster.h"
 #include "Map.h"
 #include "GameplayStatics.h"
+#include "Actor.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <vector>
 
-Monster::Monster()
-{	
+Monster::Monster(char shape, vector<Actor*> actors)
+{		
+	Shape = shape;
+	Init(actors);
 }
-
-void Monster::Init(Map * map, Goal * goal, Player * player)
-{
-	// ¸Ê¿¡¼­ ºó °÷À» Ã£¾Æ¼­ ·£´ý »ý¼º
-	int initX = rand() % 10;
-	int initY = rand() % 10;	
-	while (map->data[initY][initX] != 0) {
-		initX = rand() % 10;
-		initY = rand() % 10;
-	}
-	X = initX;
-	Y = initY;
-	shape = 'M';
-	srand(time(nullptr));
-}
-
 
 Monster::~Monster()
 {
 }
 
-void Monster::Move(Map * map)
+
+void Monster::Init(vector<Actor*> actors)
+{
+	Map* map = dynamic_cast<Map*>(actors[0]);	
+	int initX = rand() % map->sizeX;
+	int initY = rand() % map->sizeY;
+	bool isOK = false;
+	while (!isOK) {
+		isOK = true;
+		if (map->data[initY][initX] != 0) isOK = false;
+		for (auto actor : actors) {
+			Character* c = dynamic_cast<Character*>(actor);
+			if (c && initX == c->X && initY == c->Y) {
+				isOK = false;
+			}
+		}
+
+		initX = rand() % map->sizeX;
+		initY = rand() % map->sizeY;
+	}
+	srand(time(nullptr));
+}
+
+void Monster::Move(int KeyCode, Map * map)
 {
 	int Direction = rand() % 4;
 
@@ -52,6 +63,6 @@ void Monster::Render()
 {
 	GameplayStatics::GotoXY(X, Y);
 	printf("\033[0;31m");
-	printf("%c", shape);
+	printf("%c", Shape);
 	printf("\033[0m");
 }

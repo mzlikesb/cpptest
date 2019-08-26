@@ -21,7 +21,7 @@ void Player::Init()
 {
 	X = 1;
 	Y = 1;
-	shape = 'P';
+	Shape = 'P';
 }
 
 void Player::Move(int KeyCode, Map* map)
@@ -44,7 +44,7 @@ void Player::Render()
 {
 	GameplayStatics::GotoXY(X, Y);
 	printf("\033[0;32m");
-	printf("%c", shape);
+	printf("%c", Shape);
 	printf("\033[0m");
 
 }

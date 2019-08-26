@@ -11,39 +11,18 @@
 
 Engine::Engine()
 {	
-	std::cout << "Engine Constructor" << std::endl;
 	bIsRunning = true;
-
-	player = new Player();	
-	map = new Map();
-	goal = new Goal();
-	MonsterNumber = 1;
-	monsters.push_back(new Monster());
-	monsters[0]->Init(map, goal, player);
 	gameMode = new GameMode();
 }
 
 Engine::~Engine()
-{
-	std::cout << "Engine Destructor" << std::endl;
-	
-	delete player;
-	player = nullptr;
-
-	// 메모리 release
-	for (auto monster : monsters)
+{		
+	for (auto actor : actors)
 	{
-		delete monster;
-		monster = nullptr;
+		delete actor;
+		actor = nullptr;
 	}	
-	// 벡터 삭제
-	monsters.erase(monsters.begin(), monsters.end());
-
-	delete map;
-	map = nullptr;
-
-	delete goal;
-	goal = nullptr;
+	actors.clear();
 
 	delete gameMode;
 	gameMode = nullptr;
@@ -59,12 +38,12 @@ void Engine::Tick()
 	if (KeyCode == 'q') bIsRunning = false;
 	else if (KeyCode == 224) return;
 
-	player->Move(KeyCode, map);
-	for (auto monster : monsters)
+	for (auto actor : actors)
 	{
-		monster->Move(map);
-	}	
-	EGameOverType result = gameMode->CheckRule(player, monsters, goal);
+		actor->Tick(KeyCode, (Map*)actors[0]);
+	}
+	
+	EGameOverType result = gameMode->CheckRule(actors);
 
 	switch (result)
 	{
@@ -74,16 +53,14 @@ void Engine::Tick()
 		}
 		break;
 		case EGameOverType::Escape:
-		{			
-			player->Init();
-			goal->Init();			
-			for (auto monster : monsters)
-			{
-				monster->Init(map, goal, player);
+		{	
+			for (auto actor : actors) {
+				Character* c = dynamic_cast<Character*>(actor);
+				if (c) {
+					c->Init();
+				}
 			}
-			monsters.push_back(new Monster());
-			monsters[MonsterNumber]->Init(map, goal, player);
-			MonsterNumber++;
+			actors.push_back(new Monster('M', actors));			
 		}
 		break;
 		default:
@@ -93,15 +70,11 @@ void Engine::Tick()
 
 void Engine::Render()
 {
-	map->Render();
-	goal->Render();
-	player->Render();
-	for (auto monster: monsters)
+	for (auto actor: actors)
 	{
-		monster->Render();
-	}	
-
-	GameplayStatics::GotoXY(0, 10);
+		actor->Render();
+	}
+	GameplayStatics::GotoXY(0, 20);
 }
 
 void Engine::Run()

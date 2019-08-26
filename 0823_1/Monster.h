@@ -1,15 +1,18 @@
 #pragma once
-class Monster
+#include "Character.h"
+#include "Actor.h"
+#include <vector>
+using namespace std;
+
+class Monster : public Character
 {
 public:
-	Monster();
-	void Init(class Map* map, class Goal* goal, class Player* player);
+	Monster(char shape, vector<class Actor*> actors);
 	~Monster();
-	void Move(class Map* map);
-	void Render();
 
-	int X;
-	int Y;
-	char shape;
+	void Init(vector<Actor*> actors);
+	virtual void Move(int KeyCode, class Map* map) override;
+	virtual void Render() override;
+
 };
 
