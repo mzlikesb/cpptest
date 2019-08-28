@@ -10,18 +10,14 @@
 
 Player::Player()
 {
-	Init();
+	X = 1;
+	Y = 1;
+	Shape = 'P';
+	ForegroundColor = LIGHTGREEN;
 }
 
 Player::~Player()
 {
-}
-
-void Player::Init()
-{
-	X = 1;
-	Y = 1;
-	Shape = 'P';
 }
 
 void Player::Move(int KeyCode, Map* map)
@@ -38,13 +34,4 @@ void Player::Move(int KeyCode, Map* map)
 		X = NewPlayerX;
 		Y = NewPlayerY;
 	}
-}
-
-void Player::Render()
-{
-	GameplayStatics::GotoXY(X, Y);
-	printf("\033[0;32m");
-	printf("%c", Shape);
-	printf("\033[0m");
-
 }

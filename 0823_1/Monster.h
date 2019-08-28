@@ -6,13 +6,11 @@ using namespace std;
 
 class Monster : public Character
 {
-public:
-	Monster(char shape, vector<class Actor*> actors);
+public:	
+	Monster();
 	~Monster();
 
-	void Init(vector<Actor*> actors);
 	virtual void Move(int KeyCode, class Map* map) override;
 	virtual void Render() override;
-
 };
 

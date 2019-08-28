@@ -5,38 +5,22 @@
 
 Map::Map()
 {
-	Initialize();
+	size = 10;
 }
 
 Map::~Map()
 {
 }
 
-void Map::Initialize()
-{
-	sizeY = 20;
-	sizeX = 20;
-	for (int y = 0; y < sizeY; y++)
-	{
-		for (int x = 0; x < sizeX; x++)
-		{
-			if (y == 0 || y == sizeY - 1 || x == 0 || x == sizeX - 1) data[y][x] = 1;
-			else data[y][x] = 0;
-		}
-	}
-}
-
 void Map::Render()
 {
-	system("cls");
-
-	for (int y = 0; y < sizeY; y++)
+	MapBase::Render();
+	for (int y = 0; y < size; y++)
 	{
-		for (int x = 0; x < sizeX; x++)
+		for (int x = 0; x < size; x++)
 		{
 			GameplayStatics::GotoXY(x, y);
 			printf("%c", MapTile[data[y][x]]);
 		}
-		printf("\n");
 	}
 }

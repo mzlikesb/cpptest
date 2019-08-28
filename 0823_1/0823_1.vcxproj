@@ -25,9 +25,14 @@
     <ClInclude Include="GameMode.h" />
     <ClInclude Include="GameplayStatics.h" />
     <ClInclude Include="Goal.h" />
+    <ClInclude Include="Goblin.h" />
     <ClInclude Include="Map.h" />
+    <ClInclude Include="Map2.h" />
+    <ClInclude Include="MapBase.h" />
     <ClInclude Include="Monster.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="Slime.h" />
+    <ClInclude Include="WildPig.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Actor.cpp" />
@@ -36,10 +41,15 @@
     <ClCompile Include="GameMode.cpp" />
     <ClCompile Include="GameplayStatics.cpp" />
     <ClCompile Include="Goal.cpp" />
+    <ClCompile Include="Goblin.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Map.cpp" />
+    <ClCompile Include="Map2.cpp" />
+    <ClCompile Include="MapBase.cpp" />
     <ClCompile Include="Monster.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Slime.cpp" />
+    <ClCompile Include="WildPig.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />

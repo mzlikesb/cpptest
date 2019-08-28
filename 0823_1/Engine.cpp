@@ -30,7 +30,7 @@ Engine::~Engine()
 
 void Engine::Input()
 {
-	KeyCode = getch();
+	KeyCode = _getch();
 }
 
 void Engine::Tick()
@@ -54,13 +54,13 @@ void Engine::Tick()
 		break;
 		case EGameOverType::Escape:
 		{	
-			for (auto actor : actors) {
+			/*for (auto actor : actors) {
 				Character* c = dynamic_cast<Character*>(actor);
 				if (c) {
 					c->Init();
 				}
-			}
-			actors.push_back(new Monster('M', actors));			
+			}*/
+			actors.push_back(new Monster());			
 		}
 		break;
 		default:

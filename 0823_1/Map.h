@@ -1,18 +1,24 @@
 #pragma once
-#include "Actor.h"
+#include "Mapbase.h"
 
-class Map : public Actor
+class Map : public MapBase
 {
 public:
 	Map();
 	~Map();
 	
-	virtual void Render() override;
-	
-	void Initialize();
-
-	int data[20][20];
-	char MapTile[10] = { ' ', '@'};
-	int sizeX, sizeY;
+	virtual void Render() override;	
+	int data[10][10] = {
+		{1,1,1,1,1,1,1,1,1,1},
+		{1,0,0,0,0,0,0,0,0,1},
+		{1,0,0,0,0,0,0,0,0,1},
+		{1,0,0,0,0,0,0,0,0,1},
+		{1,0,0,0,1,0,0,0,0,1},
+		{1,0,0,0,1,0,0,0,0,1},
+		{1,0,0,0,1,0,0,0,0,1},
+		{1,0,0,0,1,0,0,0,0,1},
+		{1,0,0,0,1,0,0,0,0,1},
+		{1,1,1,1,1,1,1,1,1,1},
+	};
 };
 
